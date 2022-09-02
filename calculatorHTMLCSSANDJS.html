@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        html,body
+        {
+            height: 100%;
+        }
+        body
+        {
+            background-color: #999;
+        }
+        .calculator
+        {
+            background-color: #353535;
+            width: 300px;
+            padding: 15px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            text-align: center;
+            border-radius: 5px;
+            box-shadow: 0 6px 0 #a1a1a1, 0 8px 10px rgba(0, 0, 0, 0.75);
+        }
+        .result
+        {
+            background-color: #cecfac;
+            color: #3b3b32;
+            width: 90%;
+            margin: 8px 0 20px 10px;
+            text-align: right;
+            height: 50px;
+            line-height: 50px;
+            font-size: 36px;
+            padding-right: 10px;
+            overflow: hidden;
+            box-shadow: inset 0 0 8px rgba(0,0,0,0.5), inset 0px 2px 0px #a1a1a1;
+        }
+        ul
+        {
+            padding: 0;
+            margin: 0;
+        }
+        ul li
+        {
+            list-style: none;
+            background-color: #4e4e4e;
+            padding: 10px;
+            width: 15%;
+            float: left;
+            color: #fff;
+            margin: 5px;
+            cursor: pointer;
+            font-size: 20px;
+            border-radius: 5px;
+            box-shadow: 0 5px 0 #a5a5a5, inset 0 2px 5px rgba(0, 0, 0, 0.75);
+        }
+        ul li:active
+        {
+            position: relative;
+            top:5px;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.4);
+        }
+        ul li:nth-child(16)
+        {
+            height: 75px;
+            line-height: 75px;
+        }
+        ul li:last-child
+        {
+            margin-top: -47.3px;
+            width: 65%;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="result">0</div>
+        <ul>
+            <li>C</li>
+            <li>*</li>
+            <li>/</li>
+            <li>.</li> 
+            <li>7</li>
+            <li>8</li>
+            <li>9</li>
+            <li>+</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+            <li>-</li>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>=</li>
+            <li>0</li>  
+        </ul>
+    </div>
+    <script>
+        const $lis = document.querySelectorAll("ul li")
+        $lis.forEach((node) =>
+        {
+            node.addEventListener('mousedown', function(event)
+            {
+                const value = node.innerText.trim()
+                const $result = document.querySelector(".result")
+                const resultText = $result.innerText.trim()
+
+                if(resultText == "0" || resultText.toLowerCase() == 'undefined' || resultText.toLowerCase() == "infinity")
+                {
+                    $result.innerText = ''
+                }
+                if(value == "=")
+                {
+                    let solution = eval(resultText)
+                    $result.innerText = solution
+                    return true
+                }
+                if (value.toLowerCase() == "c")
+                {
+                    $result.innerText = ""
+                    return true
+                }
+
+                $result.append(value)
+            })
+        })
+        
+    </script>
+</body>
+</html>
